@@ -136,6 +136,13 @@ data/sample/  # Optional: exclude sample data if large
 *.tmp
 *.bak
 
+# Internal documentation (not needed for users)
+all_the_changes_i_did.txt
+PHASE1_SUMMARY.md
+PHASE5_ARCHITECTURE_SUMMARY.md
+GITHUB_UPLOAD_CHECKLIST.md
+GITHUB_UPLOAD_GUIDE.md
+
 # Large files
 *.pickle
 *.pkl
