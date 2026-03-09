@@ -117,13 +117,6 @@ print(f"Visualizations: {results['visualizations']['total_plots_generated']}")
 print(f"Report: {results['report']}")
 ```
 
-#### Option 3: Docker (Optional)
-
-```bash
-docker build -t ai-analyst .
-docker run -v $(pwd)/data:/app/data ai-analyst analyze /app/data/file.csv
-```
-
 ## 📊 Example Output
 
 ### Superstore Dataset Test (9,994 rows × 21 columns)
