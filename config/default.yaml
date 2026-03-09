@@ -1,0 +1,76 @@
+# Default Analysis Pipeline Configuration
+#
+# This configuration file controls the behavior of the AI Data Analyst pipeline.
+# You can override these settings when running the tool.
+
+pipeline:
+  # Enable/disable specific phases
+  phases:
+    ingestion: true
+    schema_inference: true
+    eda: true
+    insights: true
+    reporting: true
+
+  # Output settings
+  output:
+    directory: "outputs/analysis"
+    save_intermediate: true
+    save_json: true
+    save_report: true
+    timestamp: true
+
+# Insight Generation Thresholds
+insights:
+  distribution:
+    skewness_high: 1.0 # |skew| > 1.0 is highly skewed
+    skewness_moderate: 0.5 # 0.5 < |skew| <= 1.0 is moderate
+    kurtosis_high: 3.0 # Kurtosis (excess) > 3.0 is heavy-tailed
+    kurtosis_moderate: 1.0
+
+  correlation:
+    very_strong: 0.85
+    strong: 0.7
+    moderate: 0.5
+
+  categorical:
+    high_cardinality_ratio: 0.95 # >95% unique values
+    low_cardinality_ratio: 0.05
+    imbalance_threshold: 0.5 # Normalized entropy threshold
+
+  missing_data:
+    high_missing_ratio: 0.3 # >30% missing
+    moderate_missing_ratio: 0.1 # 10-30% missing
+
+# Data Quality Checks
+validation:
+  check_constant_columns: true
+  check_duplicates: true
+  check_missing_values: true
+  check_id_like_columns: true
+
+  thresholds:
+    duplicate_ratio: 0.01 # Flag if >1% duplicates
+    id_like_ratio: 0.9 # Flag if >90% unique
+
+# EDA Settings
+eda:
+  cardinality_threshold: 0.5 # Flag columns with >50% unique values
+  correlation_method: "pearson"
+  correlation_threshold: 0.5
+  include_correlation_matrix: true
+
+# Reporting
+reporting:
+  include_executive_summary: true
+  include_quality_assessment: true
+  include_recommendations: true
+  include_detailed_analysis: true
+  max_recommendations: 5
+  max_insights_per_section: 3
+
+# Logging
+logging:
+  level: "INFO" # DEBUG, INFO, WARNING, ERROR
+  verbose: false
+  log_file: null # Set to path to log to file

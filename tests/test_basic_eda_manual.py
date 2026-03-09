@@ -1,7 +1,7 @@
 from src.ingestion.loader import DataLoader
+from src.schema.inference2 import infer_schema
 
 from src.eda.basic_eda import (
-    split_column_types,
     numeric_summary,
     categorical_summary,
     cardinality_report,
@@ -12,13 +12,20 @@ from src.eda.basic_eda import (
 # Load dataset
 df = DataLoader.load("data/sample/consumer_complaints_messy.csv")
 
+schema = infer_schema(df)
+
+print("\n========================================")
+print("INFERRED SCHEMA")
+print("========================================")
+print(schema)
+
 # -----------------------------
 # Column Type Separation
 # -----------------------------
 print("\n" + "=" * 40)
 print("COLUMN TYPES")
 print("=" * 40)
-print(split_column_types(df))
+print(infer_schema(df))
 
 # -----------------------------
 # Numeric Summary
@@ -27,7 +34,7 @@ print("\n" + "=" * 40)
 print("NUMERIC SUMMARY")
 print("=" * 40)
 
-numeric = numeric_summary(df)
+numeric = numeric_summary(df, schema)
 for col, stats in numeric["numeric_summary"].items():
     print(f"\n{col}")
     for k, v in stats.items():
@@ -40,7 +47,7 @@ print("\n" + "=" * 40)
 print("CATEGORICAL SUMMARY (SAMPLE)")
 print("=" * 40)
 
-categorical = categorical_summary(df)
+categorical = categorical_summary(df, schema)
 for col, stats in list(categorical["categorical_summary"].items())[:3]:
     print(f"\n{col}")
     print(f"  Unique Values: {stats['unique_values']}")
@@ -78,7 +85,7 @@ print("\n" + "=" * 40)
 print("CORRELATION ANALYSIS")
 print("=" * 40)
 
-correlation = correlation_analysis(df, threshold=0.5)
+correlation = correlation_analysis(df, schema, threshold=0.5)
 
 print("\nStrong Correlations:")
 for pair, value in correlation["strong_correlations"].items():
