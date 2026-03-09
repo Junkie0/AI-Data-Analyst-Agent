@@ -73,7 +73,7 @@ No machine learning models, no LLMs—just pure statistical analysis with intell
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ai-data-analyst-agent.git
+git clone https://github.com/Junkie0/ai-data-analyst-agent.git
 cd ai-data-analyst-agent
 
 # Create virtual environment
